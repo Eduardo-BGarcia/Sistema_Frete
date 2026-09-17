@@ -8,13 +8,12 @@ class BaseService {
     }
 
     async insert(data) {
-        const response =
-            await this.api.post(this.endPoint, data);
+        const response = await this.api.post(this.endPoint, data);
         return response.data;
     }
 
     // async update(data) {
-    //     const response = await this.api.put(this.endPoint, data);
+    //     const response = await this.api.put(`/${this.endPoint}`, data);
     //     return response.data;
     // }
 
@@ -25,7 +24,7 @@ class BaseService {
     }
 
     async list() {
-        const response = await this.api.get(this.endPoint);
+        const response = await this.api.get(`${this.endPoint}/listar`);
         return response.data;
     }
 

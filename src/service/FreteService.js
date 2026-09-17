@@ -14,6 +14,15 @@ class FreteService extends BaseService{
         const response = await this.api.get(`${this.endPoint}/indices`);
         return response.data;
     }
+
+    async calcularFrete(freteDTO){
+        const response = await this.api.post(`${this.endPoint}/calcular`, freteDTO);
+        return response.data;
+    }
+
+    
+
+    
 }
 
 export default FreteService;
