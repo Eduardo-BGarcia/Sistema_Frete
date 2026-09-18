@@ -237,70 +237,72 @@ const Frete = () => {
                 <Toast ref={toast} />
                 <ConfirmDialog />
                 <Header titulo="Simulação de Frete"/>
-                <br />
 
                 <div style={{margin: '30px'}}>
-                    
                     <Button onClick={irHome}>Retornar</Button>
                 
                     <h2> Data e hora do acesso: {dataHora} </h2>
-                
-                    <br />
-                    <h1>Simulação</h1>
-                    <div style={{margin: '10px'}}>
-                        <label htmlFor="pesoPacote">Peso do Pacote</label><br />
-                        <InputNumber
-                            id="pesoPacote" 
-                            value={frete.pesoPacote} 
-                            onChange={(e) =>setFrete({...frete, pesoPacote: e.value})}
-                            placeholder='Ex: 15,30'/><br /><br />
+                </div>
 
-                        <label htmlFor="distancia">Distância</label><br />
-                        <InputNumber
-                            id="distancia"
-                            value={frete.distancia}
-                            onChange={(e) => setFrete({...frete, distancia: e.value})}
-                            placeholder='Ex: 120'/><br /><br />
-
-
-                        <label htmlFor="TipoEnvio">Tipo Envio</label><br />
-                        <Dropdown
-                            id="tipoEnvio"
-                            value={frete.tipoEnvio}
-                            options={tipoEnvio}
-                            onChange={(e) => setFrete({...frete, tipoEnvio: e.value})}
-                            placeholder="Selecione o tipo de envio"
-                        /><br /><br />
-                        
-                        <div>
-                            <label htmlFor="adicionalUrgencia">Adicional Urgência</label><br />
+                <div style={{margin: '30px', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap', border: '1px solid #ccc', padding: '20px', borderRadius: '8px'}}>
+                    <div style={{ flex: '1', minWidth: '320px', maxWidth: '380px', border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
+                        <h1>Simulação</h1>
+                        <div style={{margin: '10px'}}>
+                            <label htmlFor="pesoPacote">Peso do Pacote</label><br />
                             <InputNumber
-                            id="adicionalUrgencia"
-                            value={frete.adicionalUrgencia}
-                            onChange={(e) => setFrete({...frete, adicionalUrgencia: e.value})}
-                            placeholder='EX: 10, 20, 30...'
-                            disabled={frete.tipoEnvio != "Expresso"}/><br /><br />
+                                id="pesoPacote" 
+                                value={frete.pesoPacote} 
+                                onChange={(e) =>setFrete({...frete, pesoPacote: e.value})}
+                                placeholder='Ex: 15,30'/><br /><br />
+
+                            <label htmlFor="distancia">Distância</label><br />
+                            <InputNumber
+                                id="distancia"
+                                value={frete.distancia}
+                                onChange={(e) => setFrete({...frete, distancia: e.value})}
+                                placeholder='Ex: 120'/><br /><br />
+
+
+                            <label htmlFor="TipoEnvio">Tipo Envio</label><br />
+                            <Dropdown
+                                id="tipoEnvio"
+                                value={frete.tipoEnvio}
+                                options={tipoEnvio}
+                                onChange={(e) => setFrete({...frete, tipoEnvio: e.value})}
+                                placeholder="Selecione o tipo de envio"
+                            /><br /><br />
+                            
+                            <div>
+                                <label htmlFor="adicionalUrgencia">Adicional Urgência</label><br />
+                                <InputNumber
+                                id="adicionalUrgencia"
+                                value={frete.adicionalUrgencia}
+                                onChange={(e) => setFrete({...frete, adicionalUrgencia: e.value})}
+                                placeholder='EX: 10, 20, 30...'
+                                disabled={frete.tipoEnvio != "Expresso"}/><br /><br />
+                            </div>
+
+                            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem'}}>
+                                <Button onClick={calcularFrete}>Calcular</Button>
+                                <Button onClick={salvarFrete}>Salvar</Button>
+                                <Button onClick={confirmarExcluirTudo}>Limpar Tabela</Button>
+                            </div>
                         </div>
+                            <CardResumo
+                                titulo={"Resultado Simulação"}
+                                valor={`R$ ${Number(calculo || 0).toFixed(2)}`}
+                            ></CardResumo>
 
-                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem'}}>
-                            <Button onClick={calcularFrete}>Calcular</Button>
-                            <Button onClick={salvarFrete}>Salvar</Button>
-                            <Button onClick={confirmarExcluirTudo}>Limpar Tabela</Button>
-                        </div>
-                    </div>
-                        <CardResumo
-                            titulo={"Resultado Simulação"}
-                            valor={`R$ ${Number(calculo || 0).toFixed(2)}`}
-                        ></CardResumo>
+                            <br></br>
+                    
 
-                        <br></br>
                     </div>
 
-                    <div style={{margin: '30px'}}>
+                    <div style={{ flex: '2', minWidth: '500px', border: '1px solid #ccc', padding: '20px', borderRadius: '8px'}}>
                         <div>
-                            <h2>Tabela de Histórico</h2>
+                            <h1>Tabela de Histórico</h1>
 
-                            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem', margin: '10px'}}>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem', alignItems: 'center' }}>
                                 <Calendar
                                 id="dataInicial"
                                 value={filtro.dataInicial}
@@ -373,6 +375,9 @@ const Frete = () => {
                             </DataTable>
                         </div>
                     </div>
+                </div>
+
+                    
 
             </div>
         </>
